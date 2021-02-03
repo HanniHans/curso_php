@@ -1,0 +1,25 @@
+<?php
+require_once root.'db/query_fns.php';
+function get_producto_by_codigo_de_barras($codigo_de_barras){
+    $sql= "SELECT
+    productos.id,
+    productos.marca_id,
+    productos.unidades_de_medida_id,
+    productos.tipo_de_venta_de_producto_id,
+    productos.producto,
+    unidades_de_medida.unidad_de_medida,
+    tipos_de_venta_de_producto.tipo,
+    productos.precio_menudeo,
+    productos.cantidad_mayoreo,
+    productos.codigo_de_barras
+    FROM
+    productos
+    INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.unidades_de_medida_id
+    INNER JOIN tipos_de_venta_de_producto ON tipos_de_venta_de_producto.id = productos.tipo_de_venta_de_producto_id
+    WHERE
+    productos.`status` = 1 AND
+    unidades_de_medida.`status` = 1 AND
+    unidades_de_medida.`status` = 1 AND
+    productos.codigo_de_barras = $codigo_de_barras";
+    return get_item($sql);
+}
