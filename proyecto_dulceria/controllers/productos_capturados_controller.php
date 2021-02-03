@@ -21,14 +21,21 @@ if(!isset($_SESSION['usuario_id'])){
         }else {
             echo strlen($codigo_de_barras);
             require_once root.'models/productos_model.php';
-            $producto_por_codigo_de_barras = get_producto_by_codigo_de_barras($codigo_de_barras);
-            if (empty($producto_por_codigo_de_barras)) {
+            $productos_por_codigo_de_barras = get_producto_by_codigo_de_barras($codigo_de_barras);
+            if (empty($productos_por_codigo_de_barras)) {
                 echo "El producto no existe";
             }else {
-                print_r($producto_por_codigo_de_barras);
-                echo "<br>";
-                $isuma = 0;
-                //$_SESSION['carrito'][] = $producto_por_codigo_de_barras;
+                print_r($productos_por_codigo_de_barras);
+                echo "<br>"."<br>";
+                echo $productos_por_codigo_de_barras['tipo_de_venta_de_producto_id'];
+                
+                if ($productos_por_codigo_de_barras['tipo_de_venta_de_producto_id']=2) {
+                    echo "producto a granel";
+                    echo '<script>alert("Hello! I am an alert box!!");</script>';
+                }
+                
+                //$_SESSION['carrito'][] = $productos_por_codigo_de_barras;
+                echo "<br>"."<br>";
                 print_r($_SESSION['carrito']);
                 // foreach ($_SESSION['carrito'] as $productos) {
                 //     # code...
