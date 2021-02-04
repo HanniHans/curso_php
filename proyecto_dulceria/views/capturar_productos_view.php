@@ -57,11 +57,7 @@
                         //print_r(count($productos['producto']));
                         //print_r(array_column($productos, 'producto'));
                         //echo count($productos['codigo_de_barras']);
-                        if ($productos['codigo_de_barras']==$productos['codigo_de_barras']) {
-                            # code...
-                            echo $productos['codigo_de_barras'];
-                             
-                        }
+                        
                 ?>
                     <tr>
                     <td><?php echo $productos['codigo_de_barras'];?></td>

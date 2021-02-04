@@ -29,12 +29,16 @@ if(!isset($_SESSION['usuario_id'])){
                 echo "<br>"."<br>";
                 echo $productos_por_codigo_de_barras['tipo_de_venta_de_producto_id'];
                 
-                if ($productos_por_codigo_de_barras['tipo_de_venta_de_producto_id']=2) {
+                if ($productos_por_codigo_de_barras['tipo_de_venta_de_producto_id']==2) {
                     echo "producto a granel";
-                    echo '<script>alert("Hello! I am an alert box!!");</script>';
+                    //echo '<script>alert("Hello! I am an alert box!!");</script>';
+                    $_SESSION['productos_granel']=$productos_por_codigo_de_barras;
+                    require_once root.'views/granel_view.php';
+
+                }else {
+                    $_SESSION['carrito'][]=$productos_por_codigo_de_barras;
                 }
                 
-                //$_SESSION['carrito'][] = $productos_por_codigo_de_barras;
                 echo "<br>"."<br>";
                 print_r($_SESSION['carrito']);
                 // foreach ($_SESSION['carrito'] as $productos) {
@@ -53,8 +57,6 @@ if(!isset($_SESSION['usuario_id'])){
                         $_SESSION['carrito'][$i]['cantidad']= 1;
                         // print_r($_SESSION['carrito'][$i]['cantidad']);
                         // echo "<br>";
-                    }else {
-                        $_SESSION['carrito'][$i]['cantidad']= 0;
                     }
                     
                 }
@@ -91,7 +93,10 @@ if(!isset($_SESSION['usuario_id'])){
                 $precio_menudeo_unique=array_values(array_unique($precio_menudeo));
                 print_r($precio_menudeo_unique);
                 //$productos_unique = array_unique($_SESSION['carrito']);
-                //print_r(array_unique($_SESSION['carrito']));
+                //print_r(array_unique($_SESSION['carrito']));   
+
+
+
                 $pruba2 ='codigo_debarras';
                 $_SESSION['pivote']=array();
                 echo "<br>";
