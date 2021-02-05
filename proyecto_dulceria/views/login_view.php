@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php //session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +12,9 @@
             if (isset($_SESSION['usuario_id'])) {
                 # code...
         ?>
+            <a href="./index.php">Capturar Productos</a>
             <a href="./controllers/logout_controller.php">Cerrar Sesión</a> |
-            <a href="./controllers/capturar_productos_controller.php">Capturar Productos</a>
-        <?php
-            }else {
-        ?>
-            <a href="">No </a>
+            
         <?php
             }
         ?>

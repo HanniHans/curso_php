@@ -23,3 +23,17 @@ function get_producto_by_codigo_de_barras($codigo_de_barras){
     productos.codigo_de_barras = $codigo_de_barras";
     return get_item($sql);
 }
+
+function get_suma_cantidad_de_producto_by_codigo_de_barras($codigo_de_barras){
+    $cantidades= array();
+    $suma_cantidad= 0;
+    foreach($_SESSION['carrito'] as $producto){
+        if ($producto['codigo_de_barras']==$codigo_de_barras) {
+            $cantidades[] = $producto['cantidad']; 
+        }
+    }
+    $suma_cantidad = array_sum($cantidades);
+
+    return $suma_cantidad;
+    
+}
