@@ -35,5 +35,9 @@ function get_suma_cantidad_de_producto_by_codigo_de_barras($codigo_de_barras){
     $suma_cantidad = array_sum($cantidades);
 
     return $suma_cantidad;
-    
+}
+
+
+function delete_producto_de_carrito($i){
+    unset($_SESSION['carrito'][$i]);
 }

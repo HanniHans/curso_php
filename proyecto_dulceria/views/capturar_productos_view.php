@@ -36,7 +36,7 @@
             if (isset($_SESSION['carrito'])) {
                 //print_r($_SESSION['carrito']);
     ?>
-                <!-- <table>
+                <table>
                     <thead>
                     <tr>
                         <th>Codigo de barras</th>
@@ -62,7 +62,7 @@
                     
                     <tbody>
                     </tbody>
-                </table> -->
+                </table>
 
 
                 <table>
@@ -88,7 +88,7 @@
                         
                         <td><?php echo $values['total'];?></td>
                         <td>
-                            <a href="">Elimninar</a>
+                            <a href="./controllers/eliminar_producto_venta.php?codigo=<?php echo $values['codigo_de_barras'];?>">Elimninar</a>
                         </td>
                         </tr>
                     <?php
