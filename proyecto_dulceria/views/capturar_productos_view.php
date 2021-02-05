@@ -72,7 +72,7 @@
                         <th>Producto</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
-                        <!-- <th>Unidad de Medida</th> -->
+                        <th>Unidad de Medida</th>
                         <th>Total</th>
                         <th>Descuento</th>
                         <th>Eliminar</th>
@@ -86,7 +86,7 @@
                             <td><?php echo $values['producto'];?></td>
                             <td>$<?php echo $values['precio_menudeo'];?></td>
                             <td><?php echo $values['cantidad'];?></td>
-                            
+                            <td><?php echo $values['unidad_de_medida'];?></td>
                             <td><?php echo $values['total'];?></td>
                             <td><?php echo $values['descuento'];?></td>
                             <td>

@@ -56,18 +56,20 @@ function reset_lista_de_productos_de_muestra(){
      $productos_muestra = array_values(array_unique(array_column($_SESSION['carrito'],'producto')));
      $precio_menudeo_muestra = array_values(array_unique(array_column($_SESSION['carrito'],'precio_menudeo')));
      $mayoreo_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'cantidad_mayoreo')));
+     
      $_SESSION['lista_de_muestra']=array();
      $_SESSION['total_venta']=0;
      $total_venta = array();
      for ($i=0; $i < count($productos_muestra); $i++) { 
          $cantidad_por_producto = get_suma_cantidad_de_producto_by_codigo_de_barras($codigos_barras_muestra[$i]);
+         $unidad_de_medida_muestra = get_unidad_de_medidad_producto_by_codigo($codigos_barras_muestra[$i]);
          $total_por_producto = $cantidad_por_producto*$precio_menudeo_muestra[$i]; 
          $_SESSION['lista_de_muestra'][$i]['codigo_de_barras']=$codigos_barras_muestra[$i];
          $_SESSION['lista_de_muestra'][$i]['producto']=$productos_muestra[$i];
-         //$_SESSION['lista_de_muestra'][$i]['unidad_de_medida']=$unidad_muestra[$i];
+         $_SESSION['lista_de_muestra'][$i]['unidad_de_medida']=implode($unidad_de_medida_muestra);
          $_SESSION['lista_de_muestra'][$i]['cantidad']=$cantidad_por_producto;
          $_SESSION['lista_de_muestra'][$i]['precio_menudeo']=$precio_menudeo_muestra[$i];
-         $_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto;
+        //  $_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto;
          
          if ($mayoreo_muestra[$i] < $cantidad_por_producto) {
              $descuento = $total_por_producto * .10;
@@ -83,6 +85,16 @@ function reset_lista_de_productos_de_muestra(){
          }      
      }
      $_SESSION['total_venta']= array_sum($total_venta);
+}
+
+function get_unidad_de_medidad_producto_by_codigo($codigo_de_barras){
+    $unidad_de_medida = array();
+    foreach($_SESSION['carrito'] as $producto){
+        if ($producto['codigo_de_barras']==$codigo_de_barras) {
+            $unidad_de_medida[] = $producto['unidad_de_medida']; 
+        }
+    }
+    return array_unique($unidad_de_medida);
 }
 
 // function get_descuento_por_producto(){
