@@ -1,23 +1,20 @@
 <?php
 session_start();
 echo "hola";
-$codigo_de_barras =$_GET['codigo'];
 print_r($_SESSION['carrito']);
-echo $codigo_de_barras;
 echo "<br><br>";
-// $p= array_column($_SESSION['carrito'], 'codigo_de_barras');
-// print_r($p);
-// echo "<br><br>";
-// $prueba = array_unique(array_column($_SESSION['carrito'], 'codigo_de_barras'));
-// print_r($prueba);
-// echo "<br><br>";
-// $key = array_search($codigo_de_barras, $prueba);
-// print_r($key);
-// echo "<br><br>";
 define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
 $keys=array_keys($_SESSION['carrito']);
 print_r($keys);
 $llave = 0;
+if (!isset($$_GET['codigo'])) {
+    echo "no esta seteada la variable codigo de barras";
+    
+}else {
+    echo "hola2";
+    $codigo_de_barras =$_GET['codigo'];
+    echo $codigo_de_barras;
+}
 
 foreach ($_SESSION['carrito'] as $values) {
     echo $values['codigo_de_barras'];
@@ -56,7 +53,7 @@ echo "<br>";
 for ($i=0; $i <count($nose) ; $i++) { 
     echo "<br>";
     echo $nose[$i];
-    unset($_SESSION['carrito'][$nose[$i]]);
+    //unset($_SESSION['carrito'][$nose[$i]]);
 }
 echo "<br>";
 print_r($_SESSION['carrito']);
