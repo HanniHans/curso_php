@@ -25,9 +25,6 @@ function get_item($sql){
     $result = $conn->query($sql);
     //$items = array();
     if ($result->num_rows > 0) {
-    
-    //echo "<table><tr><th>ID</th><th>Name</th></tr>";
-    // output data of each row
         while($row = $result->fetch_assoc()) {
             $conn->close();
             return $row;
@@ -41,17 +38,30 @@ function get_item($sql){
 }
 
 
-function insert_item($sql){
+function insert_item_id($sql){
     $conn = get_conn();
     //$result = $conn->query($sql);
     if ($conn->query($sql) === TRUE) {
-        //echo "New record created successfully";
-        return TRUE;
+        $last_id = $conn->insert_id;
+        return $last_id;
+        //return TRUE;
     } else {
-        //echo "Error: " . $sql . "<br>" . $conn->error;
+        //return "Error: " . $sql . "<br>" . $conn->error;
         return FALSE;
     }
 
+    $conn->close();
+}
+
+function insert_item($sql){
+    $conn = get_conn();
+    //$result = $conn->query($sql);
+    if ($conn->query($sql) === TRUE) {   
+        return TRUE;
+    } else {
+        // return "Error: " . $sql . "<br>" . $conn->error;
+        return FALSE;
+    }
     $conn->close();
 }
 

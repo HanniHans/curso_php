@@ -33,10 +33,10 @@
                 <button>Agregar</button>
             </form>
     <?php
-            if (isset($_SESSION['carrito'])) {
+            if (isset($_SESSION['carrito']) ) {
                 //print_r($_SESSION['carrito']);
     ?>
-                <table>
+                <!-- <table>
                     <thead>
                     <tr>
                         <th>Codigo de barras</th>
@@ -62,7 +62,7 @@
                     
                     <tbody>
                     </tbody>
-                </table>
+                </table> -->
 
 
                 <table>
@@ -78,6 +78,7 @@
                         <th>Eliminar</th>
                     </tr>
                     </thead>
+                    <tbody>
                     <?php
                         foreach ($_SESSION['lista_de_muestra'] as $values) {
                     ?>
@@ -96,12 +97,13 @@
                     <?php
                         }
                     ?>
-                    
-                    <tbody>
                     </tbody>
                 </table>
 
                 <h2>Total de Venta: $<?php echo $_SESSION['total_venta'];?></h2>
+                <button type="submit">
+                        <a href="./controllers/finalizar_venta_controller.php">Finalizar venta</a>
+                </button>
 
     <?php
             //print_r($_SESSION['lista_de_muestra']);

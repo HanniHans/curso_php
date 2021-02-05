@@ -46,10 +46,26 @@ function insert_item($sql){
     //$result = $conn->query($sql);
     if ($conn->query($sql) === TRUE) {
         //echo "New record created successfully";
+        $last_id = $conn->insert_id;
         return TRUE;
     } else {
         //echo "Error: " . $sql . "<br>" . $conn->error;
         return FALSE;
+    }
+
+    $conn->close();
+}
+
+function insert_items($sql){
+    $conn = get_conn();
+    //$result = $conn->query($sql);
+    if ($conn->query($sql) === TRUE) {
+        return "New record created successfully";
+        $last_id = $conn->insert_id;
+        //return TRUE;
+    } else {
+        return "Error: " . $sql . "<br>" . $conn->error;
+        //return FALSE;
     }
 
     $conn->close();

@@ -24,6 +24,7 @@ if(!isset($_SESSION['usuario_id'])){
                 if ($productos_por_codigo_de_barras['tipo_de_venta_de_producto_id']==2) {
                     // echo "producto a granel";
                     $_SESSION['producto_granel']=$productos_por_codigo_de_barras;
+                    //print_r($_SESSION['producto_granel']);
                     require_once root.'views/granel_view.php';
                 }else {
                     $productos_por_codigo_de_barras['cantidad']=1;
@@ -34,9 +35,6 @@ if(!isset($_SESSION['usuario_id'])){
                         echo "no esta seteada";                 
                     }else {
                         echo "variable seteada";
-                        $unidad_de_medida_muestra = get_unidad_de_medidad_producto_by_codigo($codigo_de_barras);
-                        print_r($unidad_de_medida_muestra);
-                        echo implode($unidad_de_medida_muestra);
                         $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
                     /*
                         //print_r($_SESSION['carrito']);
@@ -87,7 +85,7 @@ if(!isset($_SESSION['usuario_id'])){
                         }
                         $_SESSION['total_venta']= array_sum($total_venta);
                     */
-                        // header("Location: ../index.php");
+                        header("Location: ../index.php");
                     }
                 }     
             }
