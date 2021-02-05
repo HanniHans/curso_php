@@ -37,7 +37,25 @@ function get_suma_cantidad_de_producto_by_codigo_de_barras($codigo_de_barras){
     return $suma_cantidad;
 }
 
-
-function delete_producto_de_carrito($i){
-    unset($_SESSION['carrito'][$i]);
+function get_keys_productos_by_codigo($codigo_de_barras){
+    $keys = array();
+    $keys_carrito=array_keys($_SESSION['carrito']);
+    $num_de_productos = array_pop($keys_carrito);
+    for ($i=0; $i <= $num_de_productos; $i++) { 
+        if (isset($_SESSION['carrito'][$i]['codigo_de_barras'])) {
+            if ($_SESSION['carrito'][$i]['codigo_de_barras']==$codigo_de_barras) {
+                $keys[]=$i;
+            }
+        }
+    }
+    return $keys;
 }
+
+// function get_tipo_de_venta_producto_by_codigo($codigo_de_barras){
+    
+// }
+
+
+// function delete_producto_de_carrito($i){
+//     unset($_SESSION['carrito'][$i]);
+// }
