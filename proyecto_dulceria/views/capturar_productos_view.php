@@ -66,6 +66,7 @@
                             <th>Codigo de barras</th>
                             <th>Producto</th>
                             <th>Precio</th>
+                            <th>Precio mayoreo</th>
                             <th>Cantidad</th>
                             <th>Unidad de Medida</th>
                             <th>Total</th>
@@ -81,6 +82,7 @@
                             <td><?php echo $values['codigo_de_barras'];?></td>
                             <td><?php echo $values['producto'];?></td>
                             <td>$<?php echo $values['precio_menudeo'];?></td>
+                            <td>$<?php echo $values['precio_mayoreo'];?></td>
                             <td><?php echo $values['cantidad'];?></td>
                             <td><?php echo $values['unidad_de_medida'];?></td>
                             <td><?php echo $values['total'];?></td>
