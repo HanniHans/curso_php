@@ -97,6 +97,22 @@ function get_unidad_de_medidad_producto_by_codigo($codigo_de_barras){
     return array_unique($unidad_de_medida);
 }
 
+function get_productos_by_categoria($categoria){
+    $sql = "SELECT productos.codigo_de_barras, productos.producto, productos.precio_menudeo, unidades_de_medida.unidad_de_medida, productos.categoria_id, categorias.categoria,
+    productos.cantidad_mayoreo, productos.descripcion
+    FROM productos INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.unidades_de_medida_id INNER JOIN categorias ON categorias.id = productos.categoria_id
+    WHERE productos.`status` = 1 AND unidades_de_medida.`status` = 1 AND productos.categoria_id = $categoria AND categorias.`status` = 1";
+    return get_items($sql);
+}
+
+function get_all_productos(){
+    $sql = "SELECT productos.codigo_de_barras, productos.producto, productos.precio_menudeo, unidades_de_medida.unidad_de_medida, productos.categoria_id, categorias.categoria, productos.cantidad_mayoreo, productos.descripcion
+    FROM productos INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.unidades_de_medida_id INNER JOIN categorias ON categorias.id = productos.categoria_id
+    WHERE productos.`status` = 1 AND unidades_de_medida.`status` = 1 AND categorias.`status` = 1
+    ORDER BY productos.producto ASC";
+    return get_items($sql);
+}
+
 // function get_descuento_por_producto(){
 //     if ($mayoreo_muestra > $cantidad_por_producto) {
 //         $descuento = $total_por_producto * .10;

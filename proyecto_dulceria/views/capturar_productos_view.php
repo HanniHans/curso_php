@@ -13,11 +13,8 @@
                 # code...
         ?>
             <a href="./controllers/logout_controller.php">Cerrar Sesión</a> |
-            <a href="./index.php">Capturar Productos</a>
-        <?php
-            }else {
-        ?>
-            <a href="">No </a>
+            <a href="./index.php">Capturar Productos</a> |
+            <a href="./controllers/buscar_productos_controller.php">Buscar Productos</a>
         <?php
             }
         ?>
@@ -25,6 +22,7 @@
 
     <?php
         if (isset($_SESSION['usuario_id'])) {
+            //print_r($_SESSION['administrador']);
     ?>
 
             <form action="./controllers/productos_capturados_controller.php" method="post">
@@ -34,7 +32,6 @@
             </form>
     <?php
             if (isset($_SESSION['carrito']) ) {
-                //print_r($_SESSION['carrito']);
     ?>
                 <!-- <table>
                     <thead>
@@ -63,20 +60,18 @@
                     <tbody>
                     </tbody>
                 </table> -->
-
-
                 <table>
                     <thead>
-                    <tr>
-                        <th>Codigo de barras</th>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Unidad de Medida</th>
-                        <th>Total</th>
-                        <th>Descuento</th>
-                        <th>Eliminar</th>
-                    </tr>
+                        <tr>
+                            <th>Codigo de barras</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Unidad de Medida</th>
+                            <th>Total</th>
+                            <th>Descuento</th>
+                            <th>Eliminar</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <?php
