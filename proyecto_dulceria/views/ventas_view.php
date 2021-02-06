@@ -7,6 +7,18 @@
     <title>Ventas</title>
 </head>
 <body>
+    <nav>
+        <?php
+            if (isset($_SESSION['usuario_id'])) {
+        ?>
+            <a href="../index.php">Capturar Productos</a> |
+            <a href="../controllers/buscar_productos_controller.php">Buscar Productos</a> |
+            <a href="../controllers/ventas_controller.php">Ventas</a> |
+            <a href="../controllers/logout_controller.php">Cerrar Sesión</a> 
+        <?php
+            }
+        ?>
+    </nav>
 
     <?php
         if (!isset($_SESSION['usuario_id'])) {

@@ -1,4 +1,26 @@
 <?php
 session_start();
-echo "hola";
-echo $_POST['fecha_venta'];
+
+define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
+if (!isset($_SESSION['usuario_id'])) {
+    echo "No estas logueado";
+}else {
+    if (!isset($_POST['fecha_venta'])) {
+        echo "la variable no esta seteada";
+    }else {
+        if (empty($_POST['fecha_venta'])) {
+            echo "no ingresaste la fecha :c";
+        }else{
+            unset($_SESSION['ventas']);
+            $fecha_venta = $_POST['fecha_venta'];
+            require_once root.'models/ventas_model.php';
+            $venta_por_fecha = get_ventas_by_fecha($fecha_venta);
+            if (empty($venta_por_fecha)) {
+                echo "no hay ningúna venta en esta fecha: ". $fecha_venta;
+            }else {
+                $_SESSION['ventas']= $venta_por_fecha;
+                header("Location: ../controllers/ventas_controller.php");
+            }
+        }
+    }
+}

@@ -24,7 +24,7 @@
         if (isset($_SESSION['usuario_id'])) {
             //print_r($_SESSION['administrador']);
     ?>
-
+            <h1>Captura de Productos</h1>
             <form action="./controllers/productos_capturados_controller.php" method="post">
                 <label for="codigo_de_barras">Código de barras</label>
                 <input type="text" name="codigo_de_barras" id="">
