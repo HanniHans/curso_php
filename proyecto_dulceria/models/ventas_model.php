@@ -6,7 +6,32 @@ function create_venta($usuario_id, $created_at){
     return insert_item_id($sql);
 }
 
-// function insert_resena($producto_id, $usuario_id, $fecha_resena, $calificacion, $titulo, $resena, $created_at){
-//     $sql = "INSERT INTO resenas (producto_id, usuario_id, fecha_resena, calificacion, titulo, resena, resenas.status, created_at) VALUES ($producto_id, $usuario_id, '$fecha_resena', '$calificacion', '$titulo', '$resena', 1,'$created_at')";
-//     return insert_item($sql);
-// }
+function get_all_ventas(){
+    $sql='SELECT ventas.id, ventas.usuario_id, ventas.`status`, ventas.created_at, CONCAT(usuarios.nombre, " ", usuarios.apellido_paterno, " ", usuarios.apellido_materno) FROM
+    ventas INNER JOIN usuarios ON usuarios.id = ventas.usuario_id WHERE ventas.`status` = 1';
+    return get_items($sql);
+}
+
+function get_last_5_ventas(){
+    //$sql ='SELECT ventas.id, ventas.usuario_id, ventas.`status`, ventas.created_at, CONCAT(usuarios.nombre, " ", usuarios.apellido_paterno, " ", usuarios.apellido_materno) AS vendedor FROM ventas INNER JOIN usuarios ON usuarios.id = ventas.usuario_id WHERE ventas.`status` = 1 ORDER BY ventas.created_at ASC LIMIT 5';
+    $sql='SELECT
+    productos_de_la_venta.venta_id,
+    CONCAT(usuarios.nombre, " ", usuarios.apellido_paterno, " ", usuarios.apellido_materno) AS vendedor,
+    Sum(productos_de_la_venta.precio_venta) AS total_venta,
+    ventas.created_at
+    FROM
+    ventas
+    INNER JOIN usuarios ON usuarios.id = ventas.usuario_id
+    INNER JOIN productos_de_la_venta ON ventas.id = productos_de_la_venta.venta_id
+    GROUP BY
+    productos_de_la_venta.venta_id
+    LIMIT 5';
+    return get_items($sql);
+}
+
+function get_ventas_by_fecha($fecha){
+    $sql="SELECT ventas.id, ventas.usuario_id, ventas.`status`, ventas.created_at, CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno, ' ', usuarios.apellido_materno) AS vendedor,
+    DATE(ventas.created_at) AS fecha_venta FROM ventas INNER JOIN usuarios ON usuarios.id = ventas.usuario_id
+    WHERE ventas.`status` = 1 HAVING fecha_venta = '$fecha'";
+    return get_items($sql);
+}
