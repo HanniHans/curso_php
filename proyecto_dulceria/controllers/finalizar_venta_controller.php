@@ -13,9 +13,7 @@ if (!isset($_SESSION['usuario_id'])) {
         $created_at = date("y-m-d H:i:s");
         require_once root.'models/ventas_model.php';
         $crear_venta = create_venta_and_get_id($_SESSION['usuario_id'], $created_at);
-        require_once root.'models/productos_model.php';
-
-        
+        //require_once root.'models/productos_model.php';
         if ($crear_venta==FALSE) {
             echo "hubo un problema al crear la venta :C";
         }else {
@@ -37,9 +35,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 }
             }
             unset($_SESSION['carrito']);
-            header("Location: ../index.php");
-            
+            header("Location: ../index.php"); 
         }
-        
     }
 }

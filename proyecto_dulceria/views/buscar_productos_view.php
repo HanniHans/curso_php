@@ -26,13 +26,13 @@
         }else {
     ?>
             <h1>Buscar productos</h1>
-            <form action="../controllers/buscar_por_codigo_de_barras.php" method="post">
+            <form action="../controllers/buscar_producto_por_codigo_de_barras.php" method="post">
                 <label for="codigo_de_barras">Codigo de barras: </label>
                 <input type="text" name="codigo_de_barras">
                 <button type="submit">Buscar</button>
             </form>
             
-            <form action="../controllers/buscar_por_categoria_controller.php" method="post">
+            <form action="../controllers/buscar_producto_por_categoria_controller.php" method="post">
                 <label for="categoria">Categoria: </label>
                 <select name="categoria" id="">
                     <?php

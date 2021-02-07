@@ -25,7 +25,6 @@ if(!isset($_POST['granel'])){
             unset($_SESSION['producto_granel']);
             require_once root.'models/productos_model.php';
             $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
-
             header("Location: ../index.php");
         }      
     }

@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+<!-- poner el if -->
     <form action="../controllers/granel_controller.php" method="post">
         <label for="granel">¿Cuanto vas a querer?</label>
         <input type="number" name="granel" id="">

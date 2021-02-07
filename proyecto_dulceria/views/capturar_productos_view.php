@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Capturar Productos</title>
 </head>
 <body>
     <nav>
@@ -27,7 +27,7 @@
             <h1>Captura de Productos</h1>
             <form action="./controllers/productos_capturados_controller.php" method="post">
                 <label for="codigo_de_barras">Código de barras</label>
-                <input type="text" name="codigo_de_barras" id="">
+                <input type="text" name="codigo_de_barras">
                 <button>Agregar</button>
             </form>
     <?php
@@ -65,7 +65,7 @@
                         <tr>
                             <th>Codigo de barras</th>
                             <th>Producto</th>
-                            <th>Precio</th>
+                            <th>Precio menudeo</th>
                             <th>Precio mayoreo</th>
                             <th>Cantidad</th>
                             <th>Unidad de Medida</th>
@@ -78,19 +78,19 @@
                     <?php
                         foreach ($_SESSION['lista_de_muestra'] as $values) {
                     ?>
-                        <tr>
-                            <td><?php echo $values['codigo_de_barras'];?></td>
-                            <td><?php echo $values['producto'];?></td>
-                            <td>$<?php echo $values['precio_menudeo'];?></td>
-                            <td>$<?php echo $values['precio_mayoreo'];?></td>
-                            <td><?php echo $values['cantidad'];?></td>
-                            <td><?php echo $values['unidad_de_medida'];?></td>
-                            <td><?php echo $values['total'];?></td>
-                            <td><?php echo $values['descuento'];?></td>
-                            <td>
-                                <a href="./controllers/eliminar_producto_venta.php?codigo=<?php echo $values['codigo_de_barras'];?>">Elimninar</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td><?php echo $values['codigo_de_barras'];?></td>
+                                <td><?php echo $values['producto'];?></td>
+                                <td>$<?php echo $values['precio_menudeo'];?></td>
+                                <td>$<?php echo $values['precio_mayoreo'];?></td>
+                                <td><?php echo $values['cantidad'];?></td>
+                                <td><?php echo $values['unidad_de_medida'];?></td>
+                                <td><?php echo $values['total'];?></td>
+                                <td><?php echo $values['descuento'];?></td>
+                                <td>
+                                    <a href="./controllers/eliminar_producto_venta.php?codigo=<?php echo $values['codigo_de_barras'];?>">Elimninar</a>
+                                </td>
+                            </tr>
                     <?php
                         }
                     ?>
@@ -106,15 +106,7 @@
             //print_r($_SESSION['lista_de_muestra']);
             }else {
                 echo "Todavia no haz agregado ningún producto";
-            }
-    
-    ?>
-
-
-
-
-
-    <?php        
+            }       
         }else {
             echo "no estas conectado";
         }

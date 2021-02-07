@@ -24,7 +24,6 @@ if (!isset($_SESSION['usuario_id'])) {
                 echo '<h1>La cantidad es mayor a la que tenias</h1>';
                 echo '<a href="../index.php">Capturar productos</a>';
             }else {
-                
                 if ($cantidad_total==$cantidad_eliminados) {
                     echo '<h1>Se han eliminado todos los productos</h1>';
                     echo '<a href="../index.php">Capturar productos</a>';

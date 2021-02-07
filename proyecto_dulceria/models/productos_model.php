@@ -77,21 +77,19 @@ function get_keys_productos_by_codigo($codigo_de_barras){
 }
 
 function reset_lista_de_productos_de_muestra(){
-     $codigos_barras_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'codigo_de_barras')));
-     $productos_muestra = array_values(array_unique(array_column($_SESSION['carrito'],'producto')));
-     $precio_menudeo_muestra = array_values(array_unique(array_column($_SESSION['carrito'],'precio_menudeo')));
-     $precio_mayoreo_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'precio_mayoreo')));
-     $mayoreo_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'cantidad_mayoreo')));
+    $codigos_barras_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'codigo_de_barras')));
+    $productos_muestra = array_values(array_unique(array_column($_SESSION['carrito'],'producto')));
+    $precio_menudeo_muestra = array_values(array_unique(array_column($_SESSION['carrito'],'precio_menudeo')));
+    $precio_mayoreo_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'precio_mayoreo')));
+    $mayoreo_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'cantidad_mayoreo')));
      
-     $_SESSION['lista_de_muestra']=array();
-     $_SESSION['total_venta']=0;
-     $total_venta = array();
-     for ($i=0; $i < count($productos_muestra); $i++) { 
-
+    $_SESSION['lista_de_muestra']=array();
+    $_SESSION['total_venta']=0;
+    $total_venta = array();
+    for ($i=0; $i < count($productos_muestra); $i++) { 
         $cantidad_por_producto = get_suma_cantidad_de_producto_by_codigo_de_barras($codigos_barras_muestra[$i]);
         $unidad_de_medida_muestra = get_unidad_de_medidad_producto_by_codigo($codigos_barras_muestra[$i]);
         //$total_por_producto = $cantidad_por_producto*$precio_menudeo_muestra[$i]; 
-
         $_SESSION['lista_de_muestra'][$i]['codigo_de_barras']=$codigos_barras_muestra[$i];
         $_SESSION['lista_de_muestra'][$i]['producto']=$productos_muestra[$i];
         $_SESSION['lista_de_muestra'][$i]['unidad_de_medida']=implode($unidad_de_medida_muestra);
@@ -99,23 +97,20 @@ function reset_lista_de_productos_de_muestra(){
         $_SESSION['lista_de_muestra'][$i]['precio_menudeo']=$precio_menudeo_muestra[$i];
         $_SESSION['lista_de_muestra'][$i]['precio_mayoreo']=$precio_mayoreo_muestra[$i];
         //  $_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto;
-         
-         if ($mayoreo_muestra[$i] <= $cantidad_por_producto) {
+        if ($mayoreo_muestra[$i] <= $cantidad_por_producto) {
             $total_por_producto = $cantidad_por_producto*$precio_mayoreo_muestra[$i];
             $_SESSION['lista_de_muestra'][$i]['descuento']= "APLICA";
             $_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto;
-             //$_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto - $descuento;
-             
-         }else {
+             //$_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto - $descuento;    
+        }else {
             $total_por_producto = $cantidad_por_producto*$precio_menudeo_muestra[$i];
              $_SESSION['lista_de_muestra'][$i]['descuento']= "NO APLICA";
              $_SESSION['lista_de_muestra'][$i]['total']=$total_por_producto;
-            //  $total_venta[]= $total_por_producto;
-             
-         } 
-         $total_venta[]= $total_por_producto;     
-     }
-     $_SESSION['total_venta']= array_sum($total_venta);
+            //  $total_venta[]= $total_por_producto;   
+        } 
+        $total_venta[]= $total_por_producto;     
+    }
+    $_SESSION['total_venta']= array_sum($total_venta);
 }
 
 function get_unidad_de_medidad_producto_by_codigo($codigo_de_barras){
