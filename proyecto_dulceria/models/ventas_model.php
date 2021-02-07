@@ -30,8 +30,24 @@ function get_last_5_ventas(){
 }
 
 function get_ventas_by_fecha($fecha_venta){
-    $sql="SELECT productos_de_la_venta.venta_id, ventas.created_at, CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno, ' ', usuarios.apellido_materno) AS vendedor, Sum(productos_de_la_venta.precio_venta) AS total_venta
-    FROM ventas INNER JOIN usuarios ON usuarios.id = ventas.usuario_id INNER JOIN productos_de_la_venta ON ventas.id = productos_de_la_venta.venta_id
-    WHERE DATE(ventas.created_at) = '$fecha_venta' GROUP BY productos_de_la_venta.venta_id";
+    // $sql="SELECT productos_de_la_venta.venta_id, ventas.created_at, CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno, ' ', usuarios.apellido_materno) AS vendedor, Sum(productos_de_la_venta.precio_venta) AS total_venta
+    // FROM ventas INNER JOIN usuarios ON usuarios.id = ventas.usuario_id INNER JOIN productos_de_la_venta ON ventas.id = productos_de_la_venta.venta_id
+    // WHERE DATE(ventas.created_at) = '$fecha_venta' GROUP BY productos_de_la_venta.venta_id";
+    $sql="SELECT
+    ventas.id,
+    ventas.usuario_id,
+    ventas.`status`,
+    ventas.created_at,
+    CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno, ' ', usuarios.apellido_materno) AS vendedor,
+    Sum(productos_de_la_venta.precio_venta) AS total_venta
+    FROM
+    ventas
+    INNER JOIN usuarios ON usuarios.id = ventas.usuario_id
+    LEFT JOIN productos_de_la_venta ON productos_de_la_venta.venta_id = ventas.id AND productos_de_la_venta.`status` = 1
+    WHERE
+    DATE(ventas.created_at) = '2021-02-06' AND
+    ventas.`status` = 1
+    GROUP BY
+    ventas.id";
     return get_items($sql);
 }

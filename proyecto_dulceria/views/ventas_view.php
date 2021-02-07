@@ -43,6 +43,7 @@
                             <th>Fecha y hora</th>
                             <th>Nombre de Vendedor</th>
                             <th>Total</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
 
@@ -51,10 +52,21 @@
                             foreach ($_SESSION['ventas'] as $venta) {
                         ?>
                                 <tr>
-                                    <td><?php echo $venta['venta_id'];?></td>
+                                    <td><?php echo $venta['id'];?></td>
                                     <td><?php echo $venta['created_at'];?></td>
                                     <td><?php echo $venta['vendedor'];?></td>
-                                    <td><?php echo $venta['total_venta'];?></td>
+                                    <?php
+                                        if($venta['total_venta']==NULL){
+                                    ?>
+                                            <td>0</td>
+                                    <?php
+                                        }else {
+                                    ?>
+                                            <td><?php echo $venta['total_venta'];?></td>
+                                    <?php
+                                        }
+                                    ?>
+                                    <td><a href="../controllers/eliminar_venta_controller.php?venta_id=<?php echo $venta['id'];?>">Eliminar<?php?></a></td>
                                 </tr>
                         <?php
                             }
