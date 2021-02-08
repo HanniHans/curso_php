@@ -34,8 +34,7 @@
     <?php
             if (!isset($_SESSION['ventas']) || empty($_SESSION['ventas']) ) {
                 echo "no has buscando ventas";
-            }else{
-    ?>
+            }else{ ?>
                 <table>
                     <thead>
                         <tr>
@@ -57,16 +56,13 @@
                                     <td><?php echo $venta['created_at'];?></td>
                                     <td><?php echo $venta['vendedor'];?></td>
                                     <?php
-                                        if($venta['total_venta']==NULL){
-                                    ?>
+                                        if($venta['total_venta']==NULL){ ?>
                                             <td>0</td>
                                     <?php
-                                        }else {
-                                    ?>
+                                        }else { ?>
                                             <td><?php echo $venta['total_venta'];?></td>
                                     <?php
-                                        }
-                                    ?>
+                                        } ?>
                                     <td><a href="../controllers/detalles_venta_controller.php?venta_id=<?php echo $venta['id'];?>">Detalles<?php?></a></td>
                                     <td><a href="../controllers/eliminar_venta_controller.php?venta_id=<?php echo $venta['id'];?>">Eliminar<?php?></a></td>
                                 </tr>

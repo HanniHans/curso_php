@@ -26,6 +26,19 @@
         }else {
     ?>
             <h1>Buscar productos</h1>
+            <?php
+                if (isset($_SESSION['administrador'])) {
+            ?>
+                <button>
+                    <a href="">Productos eliminados</a>
+                </button>
+                <button>
+                    <a href="../controllers/agregar_producto_controller.php">Agregar Producto</a>
+                </button>
+            <?php
+                }
+            
+            ?>
             <form action="../controllers/buscar_producto_por_codigo_de_barras.php" method="post">
                 <label for="codigo_de_barras">Codigo de barras: </label>
                 <input type="text" name="codigo_de_barras">
