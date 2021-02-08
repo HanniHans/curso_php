@@ -11,10 +11,10 @@
         <?php
             if (isset($_SESSION['usuario_id'])) {
         ?>
-            <a href="../index.php">Capturar Productos</a> |
-            <a href="../controllers/buscar_productos_controller.php">Buscar Productos</a> |
-            <a href="../controllers/ventas_controller.php">Ventas</a> |
-            <a href="../controllers/logout_controller.php">Cerrar Sesión</a> 
+                <a href="../index.php">Capturar Productos</a> |
+                <a href="../controllers/buscar_productos_controller.php">Buscar Productos</a> |
+                <a href="../controllers/ventas_controller.php">Ventas</a> |
+                <a href="../controllers/logout_controller.php">Cerrar Sesión</a> 
         <?php
             }
         ?>
@@ -43,6 +43,7 @@
                             <th>Fecha y hora</th>
                             <th>Nombre de Vendedor</th>
                             <th>Total</th>
+                            <th>Detalles de la venta</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
@@ -66,6 +67,7 @@
                                     <?php
                                         }
                                     ?>
+                                    <td><a href="../controllers/detalles_venta_controller.php?venta_id=<?php echo $venta['id'];?>">Detalles<?php?></a></td>
                                     <td><a href="../controllers/eliminar_venta_controller.php?venta_id=<?php echo $venta['id'];?>">Eliminar<?php?></a></td>
                                 </tr>
                         <?php

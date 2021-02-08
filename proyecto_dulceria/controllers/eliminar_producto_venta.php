@@ -2,7 +2,7 @@
 session_start();
 define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
 
-$llave = 0;
+//$llave = 0;
 if (!isset($_SESSION['usuario_id'])) {
     echo "no estas logueado";
 }else {

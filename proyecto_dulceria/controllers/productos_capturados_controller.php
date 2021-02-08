@@ -35,7 +35,10 @@ if(!isset($_SESSION['usuario_id'])){
                         echo "no esta seteada";                 
                     }else {
                         echo "variable seteada";
+                        print_r($_SESSION['carrito']);
+                        echo "<br>";
                         $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
+                        print_r($recargar_lista_de_productos);
                     /*
                         //print_r($_SESSION['carrito']);
                         $codigos_barras_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'codigo_de_barras')));
@@ -85,7 +88,7 @@ if(!isset($_SESSION['usuario_id'])){
                         }
                         $_SESSION['total_venta']= array_sum($total_venta);
                     */
-                        header("Location: ../index.php");
+                        //header("Location: ../index.php");
                     }
                 }     
             }

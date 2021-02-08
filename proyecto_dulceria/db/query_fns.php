@@ -72,8 +72,8 @@ function update_item($sql){
         //echo "Record updated successfully";
         return TRUE; 
     } else {
-        //echo "Error updating record: " . $conn->error;
-        return FALSE;
+        return "Error updating record: " . $conn->error;
+        //return FALSE;
     }
 
     $conn->close();

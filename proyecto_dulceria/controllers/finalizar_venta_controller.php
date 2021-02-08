@@ -26,13 +26,15 @@ if (!isset($_SESSION['usuario_id'])) {
                 $cantidad_por_producto = get_suma_cantidad_de_producto_by_codigo_de_barras($producto_venta['codigo_de_barras']);
                 print_r($cantidad_por_producto);
                 if ($producto_venta['cantidad_mayoreo']<=$cantidad_por_producto) {
-                    $agregar_productos_a_venta=agregar_productos_a_venta($producto_venta['id'], $crear_venta, $producto_venta['precio_mayoreo'], $producto_venta['cantidad'], $created_at);
+                    $agregar_productos_a_venta=agregar_productos_a_venta($producto_venta['id'], $crear_venta, $producto_venta['precio_mayoreo'], $producto_venta['referencia_por_unidad'], $producto_venta['cantidad'], $created_at);
+                    // echo $agregar_productos_a_venta;
                 }else {
-                    $agregar_productos_a_venta=agregar_productos_a_venta($producto_venta['id'], $crear_venta, $producto_venta['precio_menudeo'], $producto_venta['cantidad'], $created_at);
+                    $agregar_productos_a_venta=agregar_productos_a_venta($producto_venta['id'], $crear_venta, $producto_venta['precio_menudeo'], $producto_venta['referencia_por_unidad'], $producto_venta['cantidad'], $created_at);
                 }
                 if ($agregar_productos_a_venta==FALSE) {
                     echo "hubo un problema al agregar el producto ".$producto_venta['producto']." :c";
                 }
+                
             }
             unset($_SESSION['carrito']);
             header("Location: ../index.php"); 

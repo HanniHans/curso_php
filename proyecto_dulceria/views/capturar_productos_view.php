@@ -67,10 +67,12 @@
                             <th>Producto</th>
                             <th>Precio menudeo</th>
                             <th>Precio mayoreo</th>
-                            <th>Cantidad</th>
+                            <th>Cantidad Referencia</th>
                             <th>Unidad de Medida</th>
+                            <th>Cantidad</th>
                             <th>Total</th>
                             <th>Descuento</th>
+                            
                             <th>Eliminar</th>
                         </tr>
                     </thead>
@@ -79,14 +81,16 @@
                         foreach ($_SESSION['lista_de_muestra'] as $values) {
                     ?>
                             <tr>
-                                <td><?php echo $values['codigo_de_barras'];?></td>
+                                <td><?php echo $values['codigo_de_barras'];?> </td>
                                 <td><?php echo $values['producto'];?></td>
                                 <td>$<?php echo $values['precio_menudeo'];?></td>
                                 <td>$<?php echo $values['precio_mayoreo'];?></td>
-                                <td><?php echo $values['cantidad'];?></td>
+                                <td><?php echo $values['ref']?></td>
                                 <td><?php echo $values['unidad_de_medida'];?></td>
+                                <td><?php echo $values['cantidad'];?></td>
                                 <td><?php echo $values['total'];?></td>
                                 <td><?php echo $values['descuento'];?></td>
+                                
                                 <td>
                                     <a href="./controllers/eliminar_producto_venta.php?codigo=<?php echo $values['codigo_de_barras'];?>">Elimninar</a>
                                 </td>
