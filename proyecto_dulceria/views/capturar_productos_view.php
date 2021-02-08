@@ -105,6 +105,9 @@
                 <button type="submit">
                         <a href="./controllers/finalizar_venta_controller.php">Finalizar venta</a>
                 </button>
+                <button type="submit">
+                        <a href="./controllers/cancelar_venta_controller.php">Cancelar venta</a>
+                </button>
 
     <?php
             //print_r($_SESSION['lista_de_muestra']);

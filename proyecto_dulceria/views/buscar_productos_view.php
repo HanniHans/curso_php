@@ -30,7 +30,7 @@
                 if (isset($_SESSION['administrador'])) {
             ?>
                 <button>
-                    <a href="">Productos eliminados</a>
+                    <a href="../controllers/buscar_productos_controllers/buscar_productos_eliminados.php">Productos eliminados</a>
                 </button>
                 <button>
                     <a href="../controllers/agregar_producto_controller.php">Agregar Producto</a>
@@ -77,6 +77,8 @@
                                 <th>Unidad de Medida</th>
                                 <th>Categoria</th>
                                 <th>Descripcion</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,6 +92,9 @@
                                     <td><?php echo $producto_buscado['unidad_de_medida'];?></td>
                                     <td><?php echo $producto_buscado['categoria'];?></td>
                                     <td><?php echo $producto_buscado['descripcion'];?></td>
+                                    <td><a href="../controllers/buscar_productos_controllers/modificar_producto_controller.php?producto_id=<?php echo $producto_buscado['id'];?>">Modificar<?php?></a></td>
+                                    <td><a href="../controllers/buscar_productos_controllers/eliminar_producto_controller.php?producto_id=<?php echo $producto_buscado['id'];?>">Eliminar<?php?></a></td>
+
                                 </tr>
                             <?php
                                 }

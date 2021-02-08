@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Modficar</title>
 </head>
 <body>
     <?php
         if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
             echo "no estas logueado";  
         }else {?>
-            <h1>Agregar Productos</h1>
-            <form action="../controllers/insertar_producto_controller.php" method="post">
-                <label for="codigo_barras">Codigo de Barras</label>
-                <input type="text" name="codigo_barras"><br>
+            <h1>Modificar Producto <?php echo $producto_by_id['producto']?></h1>
+            <form action="../controllers/camibiar_producto_controller.php" method="post">
+                <label for="codigo_barras" >Codigo de Barras</label>
+                <input type="text" name="codigo_barras" value="<?php echo $producto_by_id['codigo_de_barras'];?>"><br>
                 <label for="">Producto</label>
-                <input type="text" name="producto"><br>
+                <input type="text" name="producto" value="<?php echo $producto_by_id['producto'];?>"><br>
                 <label for="categoria">Categorias</label>
                 <select name="categoria">
                     <?php
@@ -61,15 +61,15 @@
                 
 
                 <label for="precio_menudeo">Precio Menudeo</label>
-                <input type="text" name="precio_menudeo"><br>
+                <input type="text" name="precio_menudeo" value="<?php echo $producto_by_id['precio_menudeo'];?>"><br>
                 <label for="precio_mayoreo">Precio Mayoreo</label>
-                <input type="text" name="precio_mayoreo"><br>
+                <input type="text" name="precio_mayoreo" value="<?php echo $producto_by_id['precio_mayoreo'];?>"><br>
                 <label for="cantidad_mayoreo">Cantidad Mayoreo</label>
-                <input type="text" name="cantidad_mayoreo"><br>
+                <input type="text" name="cantidad_mayoreo" value="<?php echo $producto_by_id['cantidad_mayoreo'];?>"><br>
                 <label for="referencia_por_unidad">Referencia precio unidad</label>
-                <input type="text" name="referencia_por_unidad"><br>
+                <input type="text" name="referencia_por_unidad" value="<?php echo $producto_by_id['referencia_por_unidad'];?>"><br>
                 <label for="descripcion">Descripcion</label>
-                <input type="text" name="descripcion"><br>
+                <input type="text" name="descripcion" value="<?php echo $producto_by_id['descripcion'];?>"><br>
                 <button>Agregar</button>
             </form>
     <?php 

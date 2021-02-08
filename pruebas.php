@@ -21,3 +21,5 @@ function get_total_venta($array_ventas){
     }
     return $resultado;
 }
+
+
