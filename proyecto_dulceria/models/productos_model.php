@@ -89,6 +89,11 @@ function get_producto_by_id($producto_id){
     return get_item($sql);
 }
 
+function modificar_productos_by_id($marca_id, $unidades_de_medida_id, $categoria_id, $tipo_de_venta_de_producto_id, $producto, $codigo_de_barras, $precio_menudeo, $precio_mayoreo, $cantidad_mayoreo, $referencia_por_unidad, $descripcion, $updated_at,$producto_id){
+    $sql ="UPDATE productos SET marca_id = $marca_id, unidades_de_medida_id= $unidades_de_medida_id, categoria_id=$categoria_id, tipo_de_venta_de_producto_id=$tipo_de_venta_de_producto_id, producto='$producto', codigo_de_barras=$codigo_de_barras, precio_menudeo=$precio_menudeo, precio_mayoreo=$precio_mayoreo, cantidad_mayoreo=$cantidad_mayoreo, referencia_por_unidad=$referencia_por_unidad, descripcion= '$descripcion', status = 1, productos.updated_at = '$updated_at' WHERE id = $producto_id";
+    return update_item($sql);
+}
+
 function reset_lista_de_productos_de_muestra(){
     //obtener valores unicos del array
     $codigos_barras_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'codigo_de_barras')));

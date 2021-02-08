@@ -8,11 +8,12 @@
 </head>
 <body>
     <?php
-        if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
+        if (!isset($_SESSION['usuario_id'])) {
             echo "no estas logueado";  
         }else {?>
             <h1>Modificar Producto <?php echo $producto_by_id['producto']?></h1>
-            <form action="../controllers/camibiar_producto_controller.php" method="post">
+            <form action="../cambiar_producto_controller.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $producto_by_id['id'];?>"><br>
                 <label for="codigo_barras" >Codigo de Barras</label>
                 <input type="text" name="codigo_barras" value="<?php echo $producto_by_id['codigo_de_barras'];?>"><br>
                 <label for="">Producto</label>
