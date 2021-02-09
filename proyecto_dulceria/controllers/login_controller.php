@@ -47,7 +47,6 @@ if(isset($_SESSION['usuario_id'])){
                         $_SESSION['usuario_id']=$usuario_por_correo['id'];
                         if ($usuario_por_correo['tipo_de_usuario_id']==1) {
                             $_SESSION['administrador']=$usuario_por_correo['id'];
-                            
                         }
                         header("Location: ../index.php");
                     }

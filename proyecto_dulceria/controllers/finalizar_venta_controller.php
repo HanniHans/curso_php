@@ -34,10 +34,12 @@ if (!isset($_SESSION['usuario_id'])) {
                 if ($agregar_productos_a_venta==FALSE) {
                     echo "hubo un problema al agregar el producto ".$producto_venta['producto']." :c";
                 }
-                
             }
-            unset($_SESSION['carrito']);
-            header("Location: ../index.php"); 
+            $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
+            //require_once root.'controllers/crear_pdf_controller.php';
+            header("Location: ../views/venta_finalizada_view.php"); 
+            
+            
         }
     }
 }

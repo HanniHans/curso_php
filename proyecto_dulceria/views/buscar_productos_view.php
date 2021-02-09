@@ -30,22 +30,19 @@
                 if (isset($_SESSION['administrador'])) {
             ?>
                 <button>
-                    <a href="../controllers/buscar_productos_controllers/buscar_productos_eliminados.php">Productos eliminados</a>
-                </button>
-                <button>
                     <a href="../controllers/agregar_producto_controller.php">Agregar Producto</a>
                 </button>
             <?php
                 }
             
             ?>
-            <form action="../controllers/buscar_producto_por_codigo_de_barras.php" method="post">
+            <form action="../controllers/buscar_productos_controllers/buscar_producto_por_codigo_de_barras.php" method="post">
                 <label for="codigo_de_barras">Codigo de barras: </label>
                 <input type="text" name="codigo_de_barras">
                 <button type="submit">Buscar</button>
             </form>
             
-            <form action="../controllers/buscar_producto_por_categoria_controller.php" method="post">
+            <form action="../controllers/buscar_productos_controllers/buscar_producto_por_categoria_controller.php" method="post">
                 <label for="categoria">Categoria: </label>
                 <select name="categoria" id="">
                     <?php
@@ -59,7 +56,7 @@
                 <button type="submit">Buscar</button>
             </form>
             
-            <form action="../controllers/obtener_todos_los_productos.php" method="post">
+            <form action="../controllers/buscar_productos_controllers/obtener_todos_los_productos.php" method="post">
                 <button type="submit">Todos los productos</button>
             </form>
             

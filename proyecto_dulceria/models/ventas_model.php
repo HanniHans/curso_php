@@ -45,7 +45,6 @@ function get_total_venta($array_ventas){
             }
         }
         $ventas = $temp[0];
-        print_r($ventas);
         $ventas["total_venta"] = 0;
         foreach ($temp as $ventas_temp) {
             $ventas["total_venta"] = $ventas["total_venta"] + $ventas_temp["total_venta"];

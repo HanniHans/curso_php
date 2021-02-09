@@ -128,7 +128,7 @@ function reset_lista_de_productos_de_muestra(){
         $_SESSION['lista_de_muestra'][$i]['precio_mayoreo']=implode($precio_mayoreo_muestra);
         $_SESSION['lista_de_muestra'][$i]['ref']=implode($referencia_muestra);
         // echo intval($referencia_muestra)." ";
-        if (implode($mayoreo_muestra) <= intval($cantidad_por_producto)) {
+        if (implode($mayoreo_muestra) < intval($cantidad_por_producto)) {
             //$total_por_producto = ($referencia_muestra[$i]*$precio_mayoreo_muestra[$i])/$cantidad_por_producto;
             $total_por_producto = ($cantidad_por_producto*implode($precio_mayoreo_muestra))/implode($referencia_muestra);  
             $_SESSION['lista_de_muestra'][$i]['descuento']= "APLICA";
@@ -208,8 +208,7 @@ function get_all_productos(){
 }
 
 function insert_producto($marca_id, $unidades_de_medida_id, $categoria_id, $tipo_de_venta_de_producto_id, $producto, $codigo_de_barras, $precio_menudeo, $precio_mayoreo, $cantidad_mayoreo, $referencia_por_unidad, $descripcion, $created_at){
-    $sql = "INSERT INTO productos (marca_id, unidades_de_medida_id, categoria_id, tipo_de_venta_de_producto_id, producto, codigo_de_barras, precio_menudeo, precio_mayoreo, cantidad_mayoreo, referencia_por_unidad, descripcion, status, created_at) 
-    VALUES ($marca_id, $unidades_de_medida_id, $categoria_id, $tipo_de_venta_de_producto_id, '$producto', $codigo_de_barras, $precio_menudeo, $precio_mayoreo, $cantidad_mayoreo, $referencia_por_unidad, '$descripcion', 1, '$created_at')";
+    $sql = "INSERT INTO productos (marca_id, unidades_de_medida_id, categoria_id, tipo_de_venta_de_producto_id, producto, codigo_de_barras, precio_menudeo, precio_mayoreo, cantidad_mayoreo, referencia_por_unidad, descripcion, status, created_at)  VALUES ($marca_id, $unidades_de_medida_id, $categoria_id, $tipo_de_venta_de_producto_id, '$producto', $codigo_de_barras, $precio_menudeo, $precio_mayoreo, $cantidad_mayoreo, $referencia_por_unidad, '$descripcion', 1, '$created_at')";
     return insert_item($sql);
 }
 
@@ -231,3 +230,68 @@ function insert_producto($marca_id, $unidades_de_medida_id, $categoria_id, $tipo
 // function delete_producto_de_carrito($i){
 //     unset($_SESSION['carrito'][$i]);
 // }
+
+
+function get_productos_unicos($array_carrito){
+    //ids de las ventas
+    $ids_productos = array_unique(array_column($array_carrito, 'id'));
+    $lista_muestra = [];
+    foreach ($ids_productos as $id_producto) {
+        $temp = [];
+        //$quantity = 0;
+        foreach ($array_carrito as $arr_carrito) {
+            $id = $arr_carrito["id"];
+
+            if ($id === $id_producto) {
+                $temp[] = $arr_carrito;
+            }
+        }
+        $producto = $temp[0];
+        $producto["cantidad"] = 0;
+        $producto["total"] = 0;
+        foreach ($temp as $producto_temp) {
+            $producto["cantidad"] = $producto["cantidad"] + $producto_temp["cantidad"];
+            echo "<br>";
+        }
+        
+        $lista_muestra[] = $producto;
+    }
+    return $lista_muestra;
+}
+
+function total_por_producto_venta($prueba){
+    $array=[];
+    foreach ($prueba as $key) {
+        /*
+            echo "array1 ".$key['cantidad']. " <br>";
+            echo $key['referencia_por_unidad']. " ";
+            echo $key['precio_mayoreo']. " ";
+            echo $key['precio_menudeo']. " ";
+            echo $key['cantidad_mayoreo']. " ";
+            echo $key['total']. " ";
+            echo "<br><br>";*/
+        if ($key['cantidad']>$key['cantidad_mayoreo']) {
+            //echo $key['cantidad']." es mayor ".$key['cantidad_mayoreo']."<br>";
+            $total_por_producto = ($key["cantidad"]*$key['precio_mayoreo'])/$key['referencia_por_unidad'];
+            // echo "<br> ".$p;
+            $key['total']=$total_por_producto;
+            //echo "<br>prueba".$key['total'];  
+        }else {
+            echo $key['cantidad']." es menor ".$key['cantidad_mayoreo'];
+            $total_por_producto = ($key["cantidad"]*$key['precio_menudeo'])/$key['referencia_por_unidad'];
+            //echo " ".$p;
+            $key['total']=$total_por_producto;
+            //echo "<br>prueba".$key['total'];
+        }
+        $array[]=$key;
+    }
+    return $array;
+}
+
+function get_suma_de_total_por_producto_venta($total){
+    $suma=[];
+    foreach ($total as $t){
+        $suma[]=$t['total'];
+    }
+    return array_sum($suma);
+}
