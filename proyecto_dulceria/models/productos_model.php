@@ -259,9 +259,10 @@ function get_productos_unicos($array_carrito){
     return $lista_muestra;
 }
 
-function total_por_producto_venta($prueba){
+function get_productos_and_total_por_producto_venta(){
+    $productos_unicos = get_productos_unicos($_SESSION['carrito']);
     $array=[];
-    foreach ($prueba as $key) {
+    foreach ($productos_unicos as $key) {
         /*
             echo "array1 ".$key['cantidad']. " <br>";
             echo $key['referencia_por_unidad']. " ";
@@ -277,7 +278,7 @@ function total_por_producto_venta($prueba){
             $key['total']=$total_por_producto;
             //echo "<br>prueba".$key['total'];  
         }else {
-            echo $key['cantidad']." es menor ".$key['cantidad_mayoreo'];
+            //echo $key['cantidad']." es menor ".$key['cantidad_mayoreo'];
             $total_por_producto = ($key["cantidad"]*$key['precio_menudeo'])/$key['referencia_por_unidad'];
             //echo " ".$p;
             $key['total']=$total_por_producto;

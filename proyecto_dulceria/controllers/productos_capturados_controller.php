@@ -137,11 +137,11 @@ if(!isset($_SESSION['usuario_id'])){
 
                         $p = get_productos_unicos($_SESSION['carrito']);
                         print_r($p);
-                        echo "<br><br>";
-                        $total_por_producto = total_por_producto_venta($p);
-                        print_r($total_por_producto);
-
                         
+                        $total_por_producto = get_productos_and_total_por_producto_venta();
+                        echo "<br><br>Total_por_producto: ";
+                        print_r($total_por_producto);
+                       
                         echo "<br><br>";
                         $total_v= get_suma_de_total_por_producto_venta($total_por_producto);
                         echo "TOTAL:".$total_v;
