@@ -5,23 +5,18 @@ define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
 if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
     echo "No estas logueado";
 }else {
-    //require_once root.'views/agregar_producto_view.php';
-    
-    echo $_POST['codigo_barras'];
     $codigo_de_barras = $_POST['codigo_barras'];
-
-
     if(!isset($_POST['codigo_barras']) && !isset($_POST['producto']) && !isset($_POST['categoria']) && !isset($_POST['marca']) && !isset($_POST['tipo_venta']) && !isset($_POST['precio_menudeo']) && !isset($_POST['precio_mayoreo']) && !isset($_POST['cantidad_mayoreo']) && !isset($_POST['referencia_por_unidad']) && !isset($_POST['descripcion']) && !isset($_POST['unidad_de_medida'])){
-        echo '<script>alert("Alguna variables no esta seteada")</script>';    
+        echo "Alguna variables no esta seteada";    
     }else {
         if(empty($_POST['codigo_barras']) || empty($_POST['producto']) || empty($_POST['categoria']) || empty($_POST['marca']) || empty($_POST['tipo_venta']) || empty($_POST['precio_menudeo']) || empty($_POST['precio_mayoreo']) || empty($_POST['cantidad_mayoreo']) || empty($_POST['referencia_por_unidad']) || empty($_POST['descripcion']) || empty($_POST['unidad_de_medida'])){
-            echo '<script>alert("Alguna variable esta vacia :c")</script>';  
+            echo "Alguna variable esta vacia :c";  
         }else {
             if(strlen($_POST['codigo_barras'])!=13){
-                echo '<script>alert("Tu codigo de barras esta mal :c")</script>';
+                echo "Tu codigo de barras esta mal :c";
             }else {
                 if (!is_numeric($_POST['categoria']) || !is_numeric($_POST['marca']) || !is_numeric($_POST['tipo_venta']) || !is_numeric($_POST['precio_menudeo']) || !is_numeric($_POST['precio_mayoreo']) || !is_numeric($_POST['cantidad_mayoreo']) || !is_numeric($_POST['referencia_por_unidad'])) {
-                    echo '<script>alert("NO Es númerico")</script>';
+                    echo "NO Es númerico";
                 }else {
                     require_once root.'models/productos_model.php';
                     $productos_por_codigo_de_barras = get_producto_by_codigo_de_barras($_POST['codigo_barras']);
@@ -38,7 +33,7 @@ if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
                         $unidad_de_medidad_por_id =get_unidad_de_medidad_by_id($_POST['unidad_de_medida']);
 
                         if (empty($categoria_por_id) || empty($marca_por_id) || empty($tipo_venta_por_id) || empty($unidad_de_medidad_por_id)) {
-                            echo '<script>alert("Hubo un problema al agregar :c")</script>';
+                            echo "Hubo un problema al agregar :c";
                         }else {
                             date_default_timezone_set('America/Mexico_City');
                             $created_at = date("y-m-d H:i:s");

@@ -8,11 +8,11 @@
 </head>
 <body>
     <?php
-        if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
-            echo "no estas logueado";  
+        if (!isset($_SESSION['administrador'])) {
+            echo "no eres administrador";  
         }else {?>
             <h1>Agregar Productos</h1>
-            <form action="../controllers/insertar_producto_controller.php" method="post">
+            <form action="../buscar_productos_controllers/insertar_producto_controller.php" method="post">
                 <label for="codigo_barras">Codigo de Barras</label>
                 <input type="text" name="codigo_barras"><br>
                 <label for="">Producto</label>
