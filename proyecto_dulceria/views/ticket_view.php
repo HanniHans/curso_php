@@ -9,36 +9,12 @@
 <body>
     <h1>Ticket</h1>
     <?php
-        //session_start();
-            if (isset($_SESSION['carrito']) ) {
-    ?>
-                <!-- <table>
-                    <thead>
-                    <tr>
-                        <th>Codigo de barras</th>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Eliminar</th>
-                    </tr>
-                    </thead>
-                    <?php
-                        foreach ($_SESSION['carrito'] as $productos) {
-                            
-                    ?>
-                        <tr>
-                        <td><?php echo $productos['codigo_de_barras'];?></td>
-                        <td><?php echo $productos['producto'];?></td>
-                        <td>$<?php echo $productos['precio_menudeo'];?></td>
-                        <td><?php echo $productos['cantidad'];?></td>
-                        </tr>
-                    <?php
-                        }
-                    ?>
-                    
-                    <tbody>
-                    </tbody>
-                </table> -->
+        if (!isset($_SESSION['usuario_id'])) {
+            echo "No haz iniciado Sesión";
+        }else {
+            if (!isset($_SESSION['ticket']) || empty($_SESSION['ticket'])) {
+                echo '<h1>Hubo un problema al crear el ticket</h1>';
+            }else {?>
                 <table>
                     <thead>
                         <tr>
@@ -55,7 +31,7 @@
                     </thead>
                     <tbody>
                     <?php
-                        foreach ($_SESSION['carrito_de_muestra'] as $values) {
+                        foreach ($_SESSION['ticket'] as $values) {
                     ?>
                             <tr>
                                 <td><?php echo $values['codigo_de_barras'];?> </td>
@@ -63,6 +39,7 @@
                                 <td>$<?php echo $values['precio_menudeo'];?></td>
                                 <td>$<?php echo $values['precio_mayoreo'];?></td>>
                                 <td><?php echo $values['referencia_por_unidad'];?></td>
+                                <td><?php echo $values['unidad_de_medida'];?></td>
                                 <td><?php echo $values['cantidad'];?></td>
                                 <td><?php echo $values['total'];?></td>
                                 <td><?php echo $values['descuento'];?></td>
@@ -72,9 +49,12 @@
                     ?>
                     </tbody>
                 </table>
-
                 <h2>Total de Venta: $<?php echo $_SESSION['total_venta'];?></h2>
-        <?php } ?>
+    <?php            
+            }
+        }
+        
+    ?>
     
 </body>
 </html>

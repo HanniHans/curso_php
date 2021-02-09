@@ -12,9 +12,8 @@ if (!isset($_SESSION['administrador'])) {
         require_once root.'models/productos_model.php';
         $producto_by_id = get_producto_by_id($producto_id);
         if (empty($producto_by_id)) {
-            echo "El prooducto que quieres modificar no existe";
+            echo "El producto que quieres modificar no existe";
         }else {
-            //echo "El producto existe";
             $producto_id = $_GET['producto_id'];
             require_once root.'models/categoria_model.php';
             $todas_las_categorias = get_all_categorias();

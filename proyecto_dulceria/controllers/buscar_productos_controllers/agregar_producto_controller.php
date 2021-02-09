@@ -2,7 +2,7 @@
 session_start();
 define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
 
-if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
+if (!isset($_SESSION['administrador'])) {
     echo "No estas logueado";
 }else {
     require_once root.'models/categoria_model.php';
@@ -13,6 +13,7 @@ if (!isset($_SESSION['administrador']) && !isset($_SESSION['administrador'])) {
     $todas_los_tipos_venta = get_all_tipos_venta();
     require_once root.'models/unidades_de_medida_model.php';
     $todas_las_unidades_de_medida = get_all_unidades_de_medidad();
+    
     require_once root.'views/agregar_producto_view.php';
     
 /*

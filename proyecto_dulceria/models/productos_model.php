@@ -64,12 +64,6 @@ function get_suma_de_total_por_producto_venta($total){
     return array_sum($suma);
 }
 
-
-function get_all_productos_eliminados(){
-    $sql= "SELECT productos.id, productos.codigo_de_barras, productos.producto, productos.precio_menudeo, productos.precio_mayoreo, productos.cantidad_mayoreo, productos.referencia_por_unidad, productos.descripcion, productos.`status`, categorias.categoria, unidades_de_medida.unidad_de_medida FROM productos INNER JOIN categorias ON categorias.id = productos.categoria_id INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.categoria_id WHERE productos.`status` = -1";
-    return get_items($sql);
-}
-
 function get_suma_cantidad_de_producto_by_codigo_de_barras($codigo_de_barras){
     $cantidades= array();
     $suma_cantidad= 0;
@@ -82,6 +76,14 @@ function get_suma_cantidad_de_producto_by_codigo_de_barras($codigo_de_barras){
 
     return $suma_cantidad;
 }
+
+
+function get_all_productos_eliminados(){
+    $sql= "SELECT productos.id, productos.codigo_de_barras, productos.producto, productos.precio_menudeo, productos.precio_mayoreo, productos.cantidad_mayoreo, productos.referencia_por_unidad, productos.descripcion, productos.`status`, categorias.categoria, unidades_de_medida.unidad_de_medida FROM productos INNER JOIN categorias ON categorias.id = productos.categoria_id INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.categoria_id WHERE productos.`status` = -1";
+    return get_items($sql);
+}
+
+
 // 1 (323) 3 (222) 4 (323)
 function get_keys_productos_by_codigo($codigo_de_barras){
     $keys = array();

@@ -58,8 +58,6 @@
                         }
                     ?>
                 </select> <br>
-                
-
                 <label for="precio_menudeo">Precio Menudeo</label>
                 <input type="text" name="precio_menudeo"><br>
                 <label for="precio_mayoreo">Precio Mayoreo</label>

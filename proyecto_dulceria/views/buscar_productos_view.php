@@ -30,32 +30,34 @@
                 if (isset($_SESSION['administrador'])) {
             ?>
                 <button>
-                    <a href="../controllers/agregar_producto_controller.php">Agregar Producto</a>
+                    <a href="../controllers/buscar_productos_controllers/agregar_producto_controller.php">Agregar Producto</a>
                 </button>
             <?php
-                }
-            
-            ?>
+                }?>
             <form action="../controllers/buscar_productos_controllers/buscar_producto_por_codigo_de_barras.php" method="post">
                 <label for="codigo_de_barras">Codigo de barras: </label>
                 <input type="text" name="codigo_de_barras">
                 <button type="submit">Buscar</button>
             </form>
-            
             <form action="../controllers/buscar_productos_controllers/buscar_producto_por_categoria_controller.php" method="post">
-                <label for="categoria">Categoria: </label>
-                <select name="categoria" id="">
-                    <?php
-                        foreach ($todas_las_categorias as $categoria) {
-                    ?>
-                            <option value="<?php echo $categoria['id']?>"><?php echo $categoria['categoria']?></option>
-                    <?php
-                        }
-                    ?>
-                </select>
-                <button type="submit">Buscar</button>
+                <?php
+                    if (!empty($todas_las_categorias)) {?>
+                        <label for="categoria">Categoria: </label>
+                        <select name="categoria">
+                            <?php
+                                foreach ($todas_las_categorias as $categoria) {
+                            ?>
+                                    <option value="<?php echo $categoria['id']?>"><?php echo $categoria['categoria']?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <button type="submit">Buscar</button>
+
+                <?php        
+                    }?>
+                
             </form>
-            
             <form action="../controllers/buscar_productos_controllers/obtener_todos_los_productos.php" method="post">
                 <button type="submit">Todos los productos</button>
             </form>
@@ -74,8 +76,13 @@
                                 <th>Unidad de Medida</th>
                                 <th>Categoria</th>
                                 <th>Descripcion</th>
-                                <th>Modificar</th>
-                                <th>Eliminar</th>
+                                <?php
+                                    if (isset($_SESSION['administrador'])) {?>
+                                        <th>Modificar</th>
+                                        <th>Eliminar</th>
+                                <?php
+                                    }
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,9 +96,12 @@
                                     <td><?php echo $producto_buscado['unidad_de_medida'];?></td>
                                     <td><?php echo $producto_buscado['categoria'];?></td>
                                     <td><?php echo $producto_buscado['descripcion'];?></td>
-                                    <td><a href="../controllers/buscar_productos_controllers/modificar_producto_controller.php?producto_id=<?php echo $producto_buscado['id'];?>">Modificar<?php?></a></td>
-                                    <td><a href="../controllers/buscar_productos_controllers/eliminar_producto_controller.php?producto_id=<?php echo $producto_buscado['id'];?>">Eliminar<?php?></a></td>
-
+                                    <?php
+                                        if (isset($_SESSION['administrador'])) {?>
+                                            <td><a href="../controllers/buscar_productos_controllers/modificar_producto_controller.php?producto_id=<?php echo $producto_buscado['id'];?>">Modificar<?php?></a></td>
+                                            <td><a href="../controllers/buscar_productos_controllers/eliminar_producto_controller.php?producto_id=<?php echo $producto_buscado['id'];?>">Eliminar<?php?></a></td>
+                                    <?php
+                                        }?>
                                 </tr>
                             <?php
                                 }
@@ -104,6 +114,7 @@
                 } 
         }
     ?>
+
     
     
 </body>

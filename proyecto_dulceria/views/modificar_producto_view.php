@@ -8,11 +8,11 @@
 </head>
 <body>
     <?php
-        if (!isset($_SESSION['usuario_id'])) {
-            echo "no estas logueado";  
+        if (!isset($_SESSION['administrador'])) {
+            echo "no eres Administrador";  
         }else {?>
             <h1>Modificar Producto <?php echo $producto_by_id['producto']?></h1>
-            <form action="../cambiar_producto_controller.php" method="post">
+            <form action="../buscar_productos_controllers/cambiar_producto_controller.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $producto_by_id['id'];?>"><br>
                 <label for="codigo_barras" >Codigo de Barras</label>
                 <input type="text" name="codigo_barras" value="<?php echo $producto_by_id['codigo_de_barras'];?>"><br>
@@ -59,8 +59,6 @@
                         }
                     ?>
                 </select> <br>
-                
-
                 <label for="precio_menudeo">Precio Menudeo</label>
                 <input type="text" name="precio_menudeo" value="<?php echo $producto_by_id['precio_menudeo'];?>"><br>
                 <label for="precio_mayoreo">Precio Mayoreo</label>

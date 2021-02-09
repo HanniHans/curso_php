@@ -19,7 +19,6 @@ if (!isset($_SESSION['usuario_id'])) {
             //echo $cantidad_eliminados;
             require_once root.'models/productos_model.php';
             $llaves_de_producto_por_codigo = get_keys_productos_by_codigo($codigo_de_barras);
-
             $cantidad_total = count($llaves_de_producto_por_codigo);
             if ($cantidad_eliminados>$cantidad_total) {
                 echo '<h1>La cantidad es mayor a la que tenias</h1>';
@@ -30,16 +29,12 @@ if (!isset($_SESSION['usuario_id'])) {
                     echo '<a href="../index.php">Capturar productos</a>';
                     
                     for ($i=0; $i <count($llaves_de_producto_por_codigo); $i++) { 
-                        // echo "<br>";
-                        // echo $llaves_de_producto_por_codigo[$i];
                         unset($_SESSION['carrito'][$llaves_de_producto_por_codigo[$i]]);
                     }
                 }else {
                     echo '<h1>Se han eliminado '.$cantidad_eliminados.' productos</h1>';
                     echo '<a href="../index.php">Capturar productos</a>';
-                    for ($i=0; $i < intval($cantidad_eliminados); $i++) { 
-                        // echo "<br>";
-                        // echo $llaves_de_producto_por_codigo[$i];
+                    for ($i=0; $i < intval($cantidad_eliminados); $i++) {
                         unset($_SESSION['carrito'][$llaves_de_producto_por_codigo[$i]]);
                     }
                 }

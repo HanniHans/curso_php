@@ -32,18 +32,15 @@ if (!isset($_SESSION['administrador'])) {
                         $unidad_de_medidad_por_id =get_unidad_de_medidad_by_id($_POST['unidad_de_medida']);
 
                         if (empty($categoria_por_id) || empty($marca_por_id) || empty($tipo_venta_por_id) || empty($unidad_de_medidad_por_id)) {
-                            echo '<script>alert("Hubo un problema al agregar :c")</script>';
+                            echo "Hubo un problema al agregar :c";
                         }else {
                             date_default_timezone_set('America/Mexico_City');
                             $updated_at = date("y-m-d H:i:s");
-                            echo $_POST['id'];
-                            $insertar_nuevo_producto = modificar_productos_by_id($_POST['marca'], $_POST['unidad_de_medida'], $_POST['categoria'], $_POST['tipo_venta'], $_POST['producto'], $_POST['codigo_barras'], $_POST['precio_menudeo'], $_POST['precio_mayoreo'], $_POST['cantidad_mayoreo'], $_POST['referencia_por_unidad'], $_POST['descripcion'], $updated_at, $_POST['id']);
-                            echo $insertar_nuevo_producto;
-                            // if ($insertar_nuevo_producto==FALSE) {
-                            //     echo "Hubo un error al insertar le producto :c";
-                            // }else {
-                            //     echo '<h1>Tu Producto se ha insertado Correctamente</h1>';
-                            // }
+                            $modficar_producto = modificar_productos_by_id($_POST['marca'], $_POST['unidad_de_medida'], $_POST['categoria'], $_POST['tipo_venta'], $_POST['producto'], $_POST['codigo_barras'], $_POST['precio_menudeo'], $_POST['precio_mayoreo'], $_POST['cantidad_mayoreo'], $_POST['referencia_por_unidad'], $_POST['descripcion'], $updated_at, $_POST['id']);
+                            if ($modficar_producto==TRUE) {
+                                echo '<h1>Se ha modificado tu producto correctamente</h1>';
+                                echo '<a href="../buscar_productos_controller.php">Regresar</a>';
+                            }
                             
                         }
                     }
