@@ -1,36 +1,72 @@
 <?php
 require_once root.'db/query_fns.php';
+
 function get_producto_by_codigo_de_barras($codigo_de_barras){
-    $sql = "SELECT productos.id, productos.marca_id,
-    productos.unidades_de_medida_id,
-    productos.tipo_de_venta_de_producto_id,
-    productos.producto,
-    unidades_de_medida.unidad_de_medida,
-    tipos_de_venta_de_producto.tipo,
-    productos.precio_menudeo,
-    productos.cantidad_mayoreo,
-    productos.codigo_de_barras,
-    categorias.categoria,
-    productos.descripcion,
-    productos.precio_mayoreo,
-    productos.referencia_por_unidad
-    FROM
-    productos
-    INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.unidades_de_medida_id
-    INNER JOIN tipos_de_venta_de_producto ON tipos_de_venta_de_producto.id = productos.tipo_de_venta_de_producto_id
-    INNER JOIN categorias ON categorias.id = productos.categoria_id
-    WHERE
-    productos.`status` = 1 AND
-    unidades_de_medida.`status` = 1 AND
-    unidades_de_medida.`status` = 1 AND
-    categorias.`status` = 1 AND
-    productos.codigo_de_barras = $codigo_de_barras";
+    $sql = "SELECT productos.id, productos.marca_id, productos.unidades_de_medida_id, productos.tipo_de_venta_de_producto_id, productos.producto, unidades_de_medida.unidad_de_medida, tipos_de_venta_de_producto.tipo, productos.precio_menudeo, productos.cantidad_mayoreo, productos.codigo_de_barras, categorias.categoria, productos.descripcion, productos.precio_mayoreo, productos.referencia_por_unidad FROM productos INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.unidades_de_medida_id INNER JOIN tipos_de_venta_de_producto ON tipos_de_venta_de_producto.id = productos.tipo_de_venta_de_producto_id INNER JOIN categorias ON categorias.id = productos.categoria_id WHERE productos.`status` = 1 AND unidades_de_medida.`status` = 1 AND unidades_de_medida.`status` = 1 AND categorias.`status` = 1 AND productos.codigo_de_barras = $codigo_de_barras";
     return get_item($sql);
 }
 
+function get_productos_unicos($array_carrito){
+    $ids_productos = array_unique(array_column($array_carrito, 'id'));
+    $lista_muestra = [];
+    foreach ($ids_productos as $id_producto) {
+        $temp = [];
+        foreach ($array_carrito as $arr_carrito) {
+            $id = $arr_carrito["id"];
+
+            if ($id === $id_producto) {
+                $temp[] = $arr_carrito;
+            }
+        }
+        $producto = $temp[0];
+        $producto["cantidad"] = 0;
+        $producto["total"] = 0;
+        foreach ($temp as $producto_temp) {
+            $producto["cantidad"] = $producto["cantidad"] + $producto_temp["cantidad"];
+        }
+        
+        $lista_muestra[] = $producto;
+    }
+    return $lista_muestra;
+}
+
+function get_productos_and_total_por_producto_venta(){
+    $productos_unicos = get_productos_unicos($_SESSION['carrito']);
+    $productos_y_suma=[];
+    foreach ($productos_unicos as $producto) {
+        /*
+            echo "array1 ".$key['cantidad']. " <br>";
+            echo $key['referencia_por_unidad']. " ";
+            echo $key['precio_mayoreo']. " ";
+            echo $key['precio_menudeo']. " ";
+            echo $key['cantidad_mayoreo']. " ";
+            echo $key['total']. " ";
+            echo "<br><br>";*/
+        if ($producto['cantidad']>$producto['cantidad_mayoreo']) {
+            $total_por_producto = ($producto["cantidad"]*$producto['precio_mayoreo'])/$producto['referencia_por_unidad'];
+            $producto['total']=$total_por_producto;
+            $producto['descuento']="APLICA";
+        }else {
+            $total_por_producto = ($producto["cantidad"]*$producto['precio_menudeo'])/$producto['referencia_por_unidad'];
+            $producto['total']=$total_por_producto;
+            $producto['descuento']="NO APLICA";
+        }
+        $productos_y_suma[]=$producto;
+    }
+    return $productos_y_suma;
+}
+
+function get_suma_de_total_por_producto_venta($total){
+    $suma=[];
+    foreach ($total as $t){
+        $suma[]=$t['total'];
+    }
+    return array_sum($suma);
+}
+
+
 function get_all_productos_eliminados(){
-    $sql= "SELECT
-    productos.id, productos.codigo_de_barras, productos.producto, productos.precio_menudeo, productos.precio_mayoreo, productos.cantidad_mayoreo, productos.referencia_por_unidad, productos.descripcion, productos.`status`, categorias.categoria, unidades_de_medida.unidad_de_medida FROM productos INNER JOIN categorias ON categorias.id = productos.categoria_id INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.categoria_id WHERE productos.`status` = -1";
+    $sql= "SELECT productos.id, productos.codigo_de_barras, productos.producto, productos.precio_menudeo, productos.precio_mayoreo, productos.cantidad_mayoreo, productos.referencia_por_unidad, productos.descripcion, productos.`status`, categorias.categoria, unidades_de_medida.unidad_de_medida FROM productos INNER JOIN categorias ON categorias.id = productos.categoria_id INNER JOIN unidades_de_medida ON unidades_de_medida.id = productos.categoria_id WHERE productos.`status` = -1";
     return get_items($sql);
 }
 
@@ -232,67 +268,3 @@ function insert_producto($marca_id, $unidades_de_medida_id, $categoria_id, $tipo
 // }
 
 
-function get_productos_unicos($array_carrito){
-    //ids de las ventas
-    $ids_productos = array_unique(array_column($array_carrito, 'id'));
-    $lista_muestra = [];
-    foreach ($ids_productos as $id_producto) {
-        $temp = [];
-        //$quantity = 0;
-        foreach ($array_carrito as $arr_carrito) {
-            $id = $arr_carrito["id"];
-
-            if ($id === $id_producto) {
-                $temp[] = $arr_carrito;
-            }
-        }
-        $producto = $temp[0];
-        $producto["cantidad"] = 0;
-        $producto["total"] = 0;
-        foreach ($temp as $producto_temp) {
-            $producto["cantidad"] = $producto["cantidad"] + $producto_temp["cantidad"];
-            echo "<br>";
-        }
-        
-        $lista_muestra[] = $producto;
-    }
-    return $lista_muestra;
-}
-
-function get_productos_and_total_por_producto_venta(){
-    $productos_unicos = get_productos_unicos($_SESSION['carrito']);
-    $array=[];
-    foreach ($productos_unicos as $key) {
-        /*
-            echo "array1 ".$key['cantidad']. " <br>";
-            echo $key['referencia_por_unidad']. " ";
-            echo $key['precio_mayoreo']. " ";
-            echo $key['precio_menudeo']. " ";
-            echo $key['cantidad_mayoreo']. " ";
-            echo $key['total']. " ";
-            echo "<br><br>";*/
-        if ($key['cantidad']>$key['cantidad_mayoreo']) {
-            //echo $key['cantidad']." es mayor ".$key['cantidad_mayoreo']."<br>";
-            $total_por_producto = ($key["cantidad"]*$key['precio_mayoreo'])/$key['referencia_por_unidad'];
-            // echo "<br> ".$p;
-            $key['total']=$total_por_producto;
-            //echo "<br>prueba".$key['total'];  
-        }else {
-            //echo $key['cantidad']." es menor ".$key['cantidad_mayoreo'];
-            $total_por_producto = ($key["cantidad"]*$key['precio_menudeo'])/$key['referencia_por_unidad'];
-            //echo " ".$p;
-            $key['total']=$total_por_producto;
-            //echo "<br>prueba".$key['total'];
-        }
-        $array[]=$key;
-    }
-    return $array;
-}
-
-function get_suma_de_total_por_producto_venta($total){
-    $suma=[];
-    foreach ($total as $t){
-        $suma[]=$t['total'];
-    }
-    return array_sum($suma);
-}

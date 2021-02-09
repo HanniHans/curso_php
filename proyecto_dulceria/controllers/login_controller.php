@@ -1,7 +1,6 @@
 <?php
 session_start();
-$correo = $_POST['email'];
-$contrasena = $_POST['password'];
+
 
 echo $correo;
 echo '<br>';
@@ -11,18 +10,19 @@ if(isset($_SESSION['usuario_id'])){
     echo "ya iniciaste sesion";
     echo '<br>';
 }else {
-    if(!isset($correo) && !isset($contrasena)){
+    if(!isset($_POST['email']) && !isset($_POST['password'])){
         echo "variable no esta seteada";
         echo '<br>';  
     }else{
+        $correo = $_POST['email'];
+        $contrasena = $_POST['password'];
         echo "variable seteada";
         echo '<br>';
         if (empty($correo) || empty($contrasena)) {
-            echo "esta vacio";
+            echo "esta vacia alguno de los campos";
             echo '<br>';
         }else{
             if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-                # code...
                 echo "no ingresaste un correo";
                 echo '<br>';
             }else{
@@ -33,7 +33,6 @@ if(isset($_SESSION['usuario_id'])){
                 print_r($usuario_por_correo);
                 echo '<br>';
                 if (empty($usuario_por_correo)) {
-                    # code...
                     echo "el usuario no existe";
                     echo '<br>';
                 }else{

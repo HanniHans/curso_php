@@ -55,15 +55,14 @@
                     </thead>
                     <tbody>
                     <?php
-                        foreach ($_SESSION['lista_de_muestra'] as $values) {
+                        foreach ($_SESSION['carrito_de_muestra'] as $values) {
                     ?>
                             <tr>
                                 <td><?php echo $values['codigo_de_barras'];?> </td>
                                 <td><?php echo $values['producto'];?></td>
                                 <td>$<?php echo $values['precio_menudeo'];?></td>
-                                <td>$<?php echo $values['precio_mayoreo'];?></td>
-                                <td><?php echo $values['ref']?></td>
-                                <td><?php echo $values['unidad_de_medida'];?></td>
+                                <td>$<?php echo $values['precio_mayoreo'];?></td>>
+                                <td><?php echo $values['referencia_por_unidad'];?></td>
                                 <td><?php echo $values['cantidad'];?></td>
                                 <td><?php echo $values['total'];?></td>
                                 <td><?php echo $values['descuento'];?></td>

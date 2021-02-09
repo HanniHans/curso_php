@@ -1,4 +1,3 @@
-<?php //session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,18 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <nav>
-        <?php
-            if (isset($_SESSION['usuario_id'])) {
-                # code...
-        ?>
-            <a href="./index.php">Capturar Productos</a>
-            <a href="./controllers/logout_controller.php">Cerrar Sesión</a> |
-            
-        <?php
-            }
-        ?>
-    </nav>
 
     <?php
         if(isset($_SESSION['usuario_id'])){

@@ -7,13 +7,10 @@ if (!isset($_SESSION['usuario_id'])) {
     if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
         echo "no hay nigún producto disponible";
     }else {
-        echo "todo bien<br>";
-        // print_r($_SESSION['carrito']);
         date_default_timezone_set('America/Mexico_City');
         $created_at = date("y-m-d H:i:s");
         require_once root.'models/ventas_model.php';
         $crear_venta = create_venta_and_get_id($_SESSION['usuario_id'], $created_at);
-        //require_once root.'models/productos_model.php';
         if ($crear_venta==FALSE) {
             echo "hubo un problema al crear la venta :C";
         }else {

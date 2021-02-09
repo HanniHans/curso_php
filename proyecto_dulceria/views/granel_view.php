@@ -7,11 +7,19 @@
 </head>
 <body>
 <!-- poner el if -->
-    <form action="../controllers/granel_controller.php" method="post">
-        <label for="granel">¿Cuanto vas a querer?</label>
-        <input type="number" name="granel" id="">
-        <?php echo $productos_por_codigo_de_barras['unidad_de_medida'];?>
-        <button type="submit">Agregar</button>
-    </form>
+    <?php
+        if (!isset($_SESSION['usuario_id'])) {
+            echo "No te haz logueado <br>";
+        }else {?>
+            <form action="../controllers/granel_controller.php" method="post">
+                <label for="granel">¿Cuanto vas a querer?</label>
+                <input type="number" name="granel" id="">
+                <?php echo $productos_por_codigo_de_barras['unidad_de_medida'];?>
+                <button type="submit">Agregar</button>
+            </form>
+    <?php
+        }
+    ?>
+    
 </body>
 </html>

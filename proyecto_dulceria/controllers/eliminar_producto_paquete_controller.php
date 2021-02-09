@@ -44,7 +44,10 @@ if (!isset($_SESSION['usuario_id'])) {
                     }
                 }
             }
-            $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();         
+            $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
+            $_SESSION['carrito_de_muestra'] = get_productos_and_total_por_producto_venta();
+            $_SESSION['total']= get_suma_de_total_por_producto_venta($_SESSION['carrito_de_muestra']);
+
         /*
             $codigos_barras_muestra = array_values(array_unique(array_column($_SESSION['carrito'], 'codigo_de_barras')));
                         //print_r($codigos_barras_muestra);
