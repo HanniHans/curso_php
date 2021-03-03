@@ -2,21 +2,18 @@
 session_start();
 
 
-echo $correo;
-echo '<br>';
-echo $contrasena;
 define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
 if(isset($_SESSION['usuario_id'])){
     echo "ya iniciaste sesion";
     echo '<br>';
 }else {
     if(!isset($_POST['email']) && !isset($_POST['password'])){
-        echo "variable no esta seteada";
-        echo '<br>';  
+        //echo "variable no esta seteada";
+        //echo '<br>';  
     }else{
         $correo = $_POST['email'];
         $contrasena = $_POST['password'];
-        echo "variable seteada";
+        //echo "variable seteada";
         echo '<br>';
         if (empty($correo) || empty($contrasena)) {
             echo "esta vacia alguno de los campos";
@@ -30,7 +27,7 @@ if(isset($_SESSION['usuario_id'])){
                 echo '<br>';
                 require_once root.'models/usuarios_model.php';
                 $usuario_por_correo = get_usuario_by_correo($correo);
-                print_r($usuario_por_correo);
+                //print_r($usuario_por_correo);
                 echo '<br>';
                 if (empty($usuario_por_correo)) {
                     echo "el usuario no existe";

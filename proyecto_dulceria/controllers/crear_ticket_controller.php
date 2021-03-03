@@ -4,7 +4,8 @@ define('root', $_SERVER['DOCUMENT_ROOT'] . '/curso_php/proyecto_dulceria/');
 require_once root.'controllers/dompdf/autoload.inc.php';
 date_default_timezone_set('America/Mexico_City');
 $hora_y_fecha = date("y-m-d H:i:s");
-
+require_once root.'models/configuraciones_model.php';
+$configuracion=get_configuracion();
 use Dompdf\Dompdf;
 
 $pdf = new Dompdf();

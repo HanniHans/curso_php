@@ -23,7 +23,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 unset($_SESSION['producto_granel']);
                 
                 require_once root.'models/productos_model.php';
-                $recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
+                //$recargar_lista_de_productos = reset_lista_de_productos_de_muestra();
                 $_SESSION['carrito_de_muestra'] = get_productos_and_total_por_producto_venta();
                 $_SESSION['total']= get_suma_de_total_por_producto_venta($_SESSION['carrito_de_muestra']);
                 header("Location: ../index.php");

@@ -52,6 +52,4 @@ if (!isset($_SESSION['administrador'])) {
         }
     }
 */
-    
-
 }

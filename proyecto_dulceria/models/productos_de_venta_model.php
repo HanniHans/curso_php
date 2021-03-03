@@ -12,13 +12,6 @@ function updated_productos_de_venta_by_venta_id($fecha_y_hora, $venta_id){
 }
 
 function get_productos_de_la_venta_by_venta_id($venta_id){
-    $sql= "SELECT
-    ventas.id, productos.codigo_de_barras, productos.producto, SUM(productos_de_la_venta.cantidad)* productos_de_la_venta.precio_venta / productos_de_la_venta.referencia_por_unidad AS total_por_producto, productos_de_la_venta.precio_venta
-    FROM
-    ventas
-    LEFT JOIN productos_de_la_venta ON productos_de_la_venta.venta_id = ventas.id AND productos_de_la_venta.`status` = 1
-    INNER JOIN productos ON productos.id = productos_de_la_venta.producto_id
-    WHERE ventas.`status` = 1 AND ventas.id = $venta_id
-    GROUP BY ventas.id, productos_de_la_venta.producto_id";
+    $sql= "SELECT ventas.id, productos.codigo_de_barras, productos.producto, SUM(productos_de_la_venta.cantidad)* productos_de_la_venta.precio_venta / productos_de_la_venta.referencia_por_unidad AS total_por_producto, productos_de_la_venta.precio_venta FROM ventas LEFT JOIN productos_de_la_venta ON productos_de_la_venta.venta_id = ventas.id AND productos_de_la_venta.`status` = 1 INNER JOIN productos ON productos.id = productos_de_la_venta.producto_id WHERE ventas.`status` = 1 AND ventas.id = $venta_id GROUP BY ventas.id, productos_de_la_venta.producto_id";
     return get_items($sql);
 }

@@ -10,3 +10,4 @@ function get_categoria_by_id($categoria_id){
     return get_item($sql);
 }
 
+//dev
